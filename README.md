@@ -1,1 +1,1 @@
-# chess-js
+https://zukaeska.github.io/chess-js/
