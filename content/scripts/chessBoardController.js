@@ -57,7 +57,7 @@ function reset(){
 
 
 
-function posibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray){  
+function posibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition){  
     reset();
 
     changeColor(getLetter(columnCoordinate), rowCoordinate, Yellow)
@@ -65,10 +65,11 @@ function posibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength,
     if (type == Unusual) {
 
         for (var index = 0; index < arrayLength; index++) {
-            
+            changeColor(getLetter(columnIndex + possibleArray[index][0]), rowIndex + possibleArray[index][1], Green);
+            console.log(columnIndex + possibleArray[index][0])
         }
 
-        changeColor(getLetter(columnIndex), rowIndex, Green)
+       
         return ; 
     }
 
@@ -182,8 +183,9 @@ function input() {
     var arraySpecial = pieces[name].specialMove;
     var possibleArray = pieces[name].possibleMoves;
     var columnNumber = pieces[name].letter.charCodeAt(0) - 64;
-    posibleMoves(type, columnNumber, number, letter, specialArrayLength, arrayLength, arraySpecial, possibleArray); 
-    console.log(specialArrayLength, arrayLength, arraySpecial, possibleArray)   
+    var specialPosition = pieces[name].specialPosition;
+    posibleMoves(type, columnNumber, number, letter, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition); 
+    console.log(specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition)   
 } 
 
 

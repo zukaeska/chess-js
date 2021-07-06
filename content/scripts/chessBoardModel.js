@@ -46,6 +46,9 @@ class Knight extends Piece {
         this.letter = letter;
         this.number = number;
         this.type = Unusual;
+        this.possibleMoves = [0];
+        this.specialMove = [0];
+        this.specialPosition = 0;
     }
 }
 
@@ -56,6 +59,9 @@ class Bishop extends Piece {
         this.number = number;
         this.type = Diagonal;
         this.limit = Infinity; 
+        this.possibleMoves = [0];
+        this.specialMove = [0];
+        this.specialPosition = 0;
     }
 }
 
@@ -67,6 +73,9 @@ class King extends Piece {
         this.number = number;
         this.type = Both;
         this.limit = 1;  
+        this.possibleMoves = [0];
+        this.specialMove = [0];
+        this.specialPosition = 0;
     }
 }
 class Queen extends Piece {
@@ -76,6 +85,9 @@ class Queen extends Piece {
         this.number = number;
         this.type = Both;
         this.limit = Infinity;  
+        this.possibleMoves = [0];
+        this.specialMove = [0];
+        this.specialPosition = 0;
     }
 }
 class Rook extends Piece {
@@ -85,6 +97,9 @@ class Rook extends Piece {
         this.number = number;
         this.type = Horizontal;
         this.limit = Infinity; 
+        this.possibleMoves = [0];
+        this.specialMove = [0];
+        this.specialPosition = 0;
     }
 }
 var pawn = new Pawn();
