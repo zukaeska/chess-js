@@ -21,3 +21,4 @@ const Body = "body";
 const Enter = "#enter";
 const PieceId = "#piece";
 const Comma = ",";
+const Unusual = "unusual"
