@@ -14,12 +14,16 @@
             <label for="piece">input piece's name and coordinate:</label>
             <input type="text" id="piece">
             <button id="enter">enter</button>
-            <p id="text">(color,name,coordinate)<br>example:(white,pawn,B_2)</p>
+            <p class="text">(color,name,coordinate)<br>example:(white,pawn,B_2)</p>
+            <label for="piece">input board size (x:y):</label>
+            <input type="text" id="board">
+            <button id="size">enter</button>
         </div>
         <div id="table_div"></div>
         <script src="./content/scripts/constant.js"></script>
         <script src="./content/scripts/createBoard.js"></script>
         <script src="./content/scripts/chessBoardController.js"></script>
         <script src="./content/scripts/chessBoardModel.js"></script>
+        <script src="./content/scripts/chessBoardView.js"></script>
     </body>
 </html>

@@ -3,6 +3,9 @@ const Table = "<table></table>";
 const Tr = "<tr></tr>";
 const Th = "<th class='numbers'></th>";
 $(function () {
+    createTable();
+});
+function createTable() {
     var rowIndex;
     var columnIndex;
     var table = document.createElement("table");
@@ -12,7 +15,7 @@ $(function () {
     for (rowIndex = height; rowIndex > 0; rowIndex--) {
         var tr = document.createElement("tr");
         var th = document.createElement("th");
-        th.className = "numbers";
+        th.className = Numbers;
         th.textContent = rowIndex;
 
         $(tr).append(th);
@@ -56,7 +59,6 @@ $(function () {
     $(table).append(tr);
 
     $(divId).append(table);
-});
-
+}
 
 
