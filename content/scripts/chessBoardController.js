@@ -9,7 +9,7 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
     colorArray.push([columnCoordinate, rowCoordinate, Yellow]);
 
     //breaks if input coordinate is out of bounds
-    if(rowCoordinate > board.height || columnCoordinate > board.width) {
+    if (rowCoordinate > board.height || columnCoordinate > board.width) {
         return;
     }
 
@@ -17,16 +17,16 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
     if (type == Unusual) {
         
         for (var index = 0; index < arrayLength; index++) {
-            if(columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.height 
+            if (columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.height 
                 && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
                     colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Green]);
                 }
         }
 
-        if (rowCoordinate == specialPosition){
+        if (rowCoordinate == specialPosition) {
             
             for (var index = 0; index < specialArrayLength; index++) {
-                if(columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.height 
+                if (columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.height 
                     && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
                         colorArray.push([columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1], Green]);
                     }
@@ -53,46 +53,46 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
         checker++;
         colorArray.push([columnIndex, rowIndex, Green]);
         
-        if(checker == limit) {
+        if (checker == limit) {
             checker = 0;
             break;
         }
     }
 
     for (columnIndex = columnCoordinate + 1, rowIndex = rowCoordinate - 1; columnIndex < board.width + 1 && rowIndex > 0; columnIndex++, rowIndex--) {
-        if (type == Horizontal){ 
+        if (type == Horizontal) { 
             break;
         }
         checker++;
         colorArray.push([columnIndex, rowIndex, Green]);
 
-        if(checker == limit) {
+        if (checker == limit) {
             checker = 0;
             break;
         }     
     }
 
     for (columnIndex = columnCoordinate + 1, rowIndex = rowCoordinate + 1; columnIndex < board.width + 1 && rowIndex < board.height + 1; columnIndex++, rowIndex++) {
-        if (type == Horizontal){ 
+        if (type == Horizontal) { 
             break;
         }
         checker++;
         colorArray.push([columnIndex, rowIndex, Green]);
         
-        if(checker == limit) {
+        if (checker == limit) {
             checker = 0;
             break;
         }
     }
 
     for (columnIndex = columnCoordinate - 1, rowIndex = rowCoordinate + 1; columnIndex > 0 && rowIndex < board.height + 1; columnIndex--, rowIndex++) {
-        if (type == Horizontal){ 
+        if (type == Horizontal) { 
             break;
         }
         checker++;
         colorArray.push([columnIndex, rowIndex, Green]);
         
-        if(checker == limit) {
+        if (checker == limit) {
             checker = 0;
             break;
         }
@@ -100,52 +100,52 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
 
     //Horizontal type pieces
     for (columnIndex = columnCoordinate - 1 , rowIndex = rowCoordinate; columnIndex > 0; columnIndex--){ 
-        if (type == Diagonal){ 
+        if (type == Diagonal) { 
             break;
         }
         checker++;
         colorArray.push([columnIndex, rowIndex, Green]);  
         
-        if(checker == limit) {
+        if (checker == limit) {
             checker = 0;
             break;
         }
     }
 
     for (columnIndex = columnCoordinate + 1 , rowIndex = rowCoordinate; columnIndex < board.width + 1; columnIndex++) {
-        if (type == Diagonal){ 
+        if (type == Diagonal) { 
             break;
         }
         checker++;
         colorArray.push([columnIndex, rowIndex, Green]);    
         
-        if(checker == limit) {
+        if (checker == limit) {
             checker = 0;
             break;
         }
     }
 
     for (columnIndex = columnCoordinate , rowIndex = rowCoordinate + 1; rowIndex < board.height + 1; rowIndex++) {
-        if (type == Diagonal){ 
+        if (type == Diagonal) { 
             break;
         }
         checker++;
         colorArray.push([columnIndex, rowIndex, Green]);      
         
-        if(checker == limit) {
+        if (checker == limit) {
             checker = 0;
             break;
         }
     }
 
     for (columnIndex = columnCoordinate , rowIndex = rowCoordinate - 1; rowIndex > 0; rowIndex--) {
-        if (type == Diagonal){ 
+        if (type == Diagonal) { 
             break;
         }
         checker++;
         colorArray.push([columnIndex, rowIndex, Green]);  
         
-        if(checker == limit) {
+        if (checker == limit) {
             checker = 0;
             break;
         }

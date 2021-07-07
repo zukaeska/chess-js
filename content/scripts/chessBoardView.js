@@ -33,7 +33,7 @@ function reset(){
         colorArray.pop();
     }
     for ( var index = 0; index < board.width * board.height; index++) {
-        if (brownCell[index] != null && brownCell[index] != undefined && whiteCell[index] != null && whiteCell[index] != undefined) {
+        if (brownCell[index] !== null && brownCell[index] !== undefined && whiteCell[index] !== null && whiteCell[index] !== undefined) {
             brownCell[index].style.backgroundColor = Brown;
             whiteCell[index].style.backgroundColor = White;
         }
