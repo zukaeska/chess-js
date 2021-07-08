@@ -4,13 +4,7 @@ const Tr = "<tr></tr>";
 const Th = "<th class='numbers'></th>";
 
 
-$(function () {
-    createTable();
-});
-
-
 function createTable() {
-
     var rowIndex;
     var columnIndex;
     var table = document.createElement(TableTag);
@@ -62,8 +56,6 @@ function createTable() {
         td.textContent = String.fromCharCode(columnIndex + 64);
         $(tr).append(td);
     }
-
-    changeSize();
 
     $(table).append(tr);
 

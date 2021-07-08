@@ -5,7 +5,7 @@ class Board {
         this.array = [[]];
     }
 }
-var board = new Board(8, 8);
+
 
 class Piece {
     constructor(color, name) {
@@ -132,7 +132,7 @@ class Rook extends Piece {
     }
 }
 
-
+//class objects
 var pawn = new Pawn();
 var knight = new Knight();
 var rook = new Rook();
@@ -140,7 +140,7 @@ var queen = new Queen();
 var king = new King();
 var bishop = new Bishop();
 var pieces = {pawn, knight, rook, queen, king, bishop}
-
+var board = new Board();
 
 
 
