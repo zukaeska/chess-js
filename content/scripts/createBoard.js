@@ -10,6 +10,7 @@ $(function () {
 
 
 function createTable() {
+
     var rowIndex;
     var columnIndex;
     var table = document.createElement(TableTag);
@@ -63,6 +64,8 @@ function createTable() {
     }
 
     $(table).append(tr);
+
+    changeSize();
 
     $(TableDivId).append(table);
 }

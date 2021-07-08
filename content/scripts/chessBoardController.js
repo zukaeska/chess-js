@@ -17,7 +17,7 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
     if (type == Unusual) {
         
         for (var index = 0; index < arrayLength; index++) {
-            if (columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.height 
+            if (columnCoordinate + possibleArray[index][0] <= board.height && rowCoordinate + possibleArray[index][1] <= board.height 
                 && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
                     colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Green]);
                 }

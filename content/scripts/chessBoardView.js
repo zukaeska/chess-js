@@ -74,3 +74,5 @@ function boardResize() {
     document.getElementById(DivId).firstChild.remove();
     createTable();
 }
+
+

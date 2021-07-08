@@ -7,7 +7,6 @@ class Board {
 }
 var board = new Board(8, 8);
 
-
 class Piece {
     constructor(color, name) {
         this.color = color;

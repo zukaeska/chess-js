@@ -10,15 +10,13 @@ margin-bottom: 4px;
 }
 table{
     border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
+
 }
 .tray{
     border-collapse: collapse;
     border: 3px solid;
     width: 100px;
     height: 100px;
-        
 }
 .brown{
     background-color:brown;
@@ -29,8 +27,8 @@ table{
 img{
     margin:auto;
     display: block;
-    width: 90px;
-    height: 90px;
+    width: 85px;
+    height: 85px;
     text-align: center;
 }
 .letters{
