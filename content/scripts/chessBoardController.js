@@ -3,7 +3,7 @@ var colorArray = [];
 var previousPiece;
 
 //counts possible moves of pieces
-function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit){  
+function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit) {  
     reset();
 
     colorArray.push([columnCoordinate, rowCoordinate, Yellow]);
@@ -23,15 +23,13 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
                 }
         }
 
-        if (rowCoordinate == specialPosition) {
-            
+        if (rowCoordinate == specialPosition) {    
             for (var index = 0; index < specialArrayLength; index++) {
                 if (columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.height 
                     && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
                         colorArray.push([columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1], Green]);
                     }
-            }
-            
+            } 
         }
 
         //gives moves
@@ -39,7 +37,7 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
 
         //changes view
         changeColor(colorArray);
-       return;
+        return;
     }
 
     //for usual type of pieces
@@ -99,7 +97,7 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
     }
 
     //Horizontal type pieces
-    for (columnIndex = columnCoordinate - 1 , rowIndex = rowCoordinate; columnIndex > 0; columnIndex--){ 
+    for (columnIndex = columnCoordinate - 1 , rowIndex = rowCoordinate; columnIndex > 0; columnIndex--) { 
         if (type == Diagonal) { 
             break;
         }
@@ -178,8 +176,10 @@ function input() {
     var columnNumber = pieces[name].letter.charCodeAt(0) - 64;
     var specialPosition = pieces[name].special()[2];
     var limit = pieces[name].limit;
+
     insertImage(letter, number, color, name, previousPiece);
-    possibleMoves(type, columnNumber, number, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit);   
+    possibleMoves(type, columnNumber, number, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit);
+
     previousPiece = coordinate;
 } 
 
@@ -191,9 +191,11 @@ $(function() {
             input();      
         }  
     });
+    
     $(Enter).click(function() {
         input();
     });
+
     $(EnterSize).click(function() {
         boardResize();
         input();

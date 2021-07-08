@@ -63,9 +63,9 @@ function createTable() {
         $(tr).append(td);
     }
 
-    $(table).append(tr);
-
     changeSize();
+
+    $(table).append(tr);
 
     $(TableDivId).append(table);
 }

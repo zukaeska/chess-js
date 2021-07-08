@@ -28,7 +28,7 @@ function changeColor(colorArray) {
 }
 
 
-function reset(){
+function reset() {
     for (var index = colorArray.length; index >= 0; index--) {
         colorArray.pop();
     }
@@ -60,7 +60,6 @@ function insertImage(first, second, color, name, previousPiece) {
 function moves(colorArray) {
     insert.innerHTML = PossibleMove + Br;
     for (var index = 1; index < colorArray.length; index++) {
-        
         insert.innerHTML += coordinate(getLetter(colorArray[index][0]), colorArray[index][1]) + Br;
     }
 }
