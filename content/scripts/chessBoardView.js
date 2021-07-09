@@ -126,19 +126,26 @@ function reset() {
 $(function () {
     $(TrayClass).click(function() {
         var id = this.id;
-        var columnNumber = parseInt(id.split(Underscore)[0].charCodeAt(0) - 64);
-        var rowNumber = parseInt(id.split(Underscore)[1]);
-        var object = board.array[columnNumber][rowNumber]
-        var color = object.color;
-        var name = object.name;
-        var letter = object.letter;
-        var type = object.type;
-        var limit = object.limit;
-        var specialArrayLength = object.special()[1].length;
-        var arrayLength = object.special()[0].length;
-        var arraySpecial = object.special()[1];
-        var possibleArray = object.special()[0];
-        var specialPosition = object.special()[2];
-        possibleMoves(type, columnNumber, rowNumber, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit);
+        if(document.getElementById(id).firstChild !== undefined && document.getElementById(id).firstChild !== null){
+            var columnNumber = parseInt(id.split(Underscore)[0].charCodeAt(0) - 64);
+            var rowNumber = parseInt(id.split(Underscore)[1]);
+            var object = board.array[columnNumber][rowNumber]
+            var type = object.type;
+            var limit = object.limit;
+            var specialArrayLength = object.special()[1].length;
+            var arrayLength = object.special()[0].length;
+            var arraySpecial = object.special()[1];
+            var possibleArray = object.special()[0];
+            var specialPosition = object.special()[2];
+            possibleMoves(type, columnNumber, rowNumber, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit);
+        }
+        freeMove(id);
     });
 });
+
+
+function freeMove(id){
+    for (x in colorArray) {
+        console.log(colorArray[x].includes(3 && 2))
+      } 
+}

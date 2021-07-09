@@ -54,7 +54,6 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
                 }
             } 
         }
-
         //changes view
         changeColor(colorArray);
         return;
@@ -134,8 +133,6 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
             checker = 0;
         }
     }
-
-
     //changes view
     changeColor(colorArray);
 }
