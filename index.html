@@ -8,19 +8,10 @@
         <link rel="stylesheet" href="./content/styles/style.css">
     </head>
     <body>
-        <div id="coordinate">
-            <p id="show"></p>   
-        </div>
-        <div id="main">
-            <label for="piece">input piece's name and coordinate:</label>
-            <input type="text" id="piece">
-            <p class="text">(color,name,coordinate)<br>example:(white,pawn,B_2)</p>
-            <label for="piece">input board size (x:y):</label>
-            <input type="text" id="board">
-            <button id="size">enter</button>
-        </div>
         <center><div id="table_div"></div></center>
         <script src="./content/scripts/constant.js"></script>
+        <script src="./content/scripts/json.js"></script>
+        <script src="./content/scripts/chessBoardStartingPosition.js"></script>
         <script src="./content/scripts/chessGameView.js"></script>
         <script src="./content/scripts/createBoard.js"></script>
         <script src="./content/scripts/chessBoardController.js"></script>

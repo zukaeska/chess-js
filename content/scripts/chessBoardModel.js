@@ -2,7 +2,12 @@ class Board {
     constructor(width, height) {
         this.width = width;
         this.height = height;
-        this.array = [[]];
+        this.array = new Array(this.width);
+    }
+    createArray() {
+        for (var index = 1; index <= this.width; index++) {
+            this.array[index] = new Array(this.height);
+          }
     }
 }
 
@@ -133,14 +138,14 @@ class Rook extends Piece {
 }
 
 //class objects
-var pawn = new Pawn();
-var knight = new Knight();
-var rook = new Rook();
-var queen = new Queen();
-var king = new King();
-var bishop = new Bishop();
-var pieces = {pawn, knight, rook, queen, king, bishop}
-var board = new Board();
-
+var pieces = {
+    "pawn" : Pawn, 
+    "knight" : Knight, 
+    "rook" : Rook, 
+    "queen" : Queen, 
+    "king" : King, 
+    "bishop" : Bishop
+}
+var board = new Board(Eight, Eight);
 
 

@@ -3,7 +3,8 @@ var colorArray = [];
 var previousPiece;
 
 //counts possible moves of pieces
-function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit) {  
+function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit) { 
+
     reset();
 
     colorArray.push([columnCoordinate, rowCoordinate, Yellow]);
@@ -17,7 +18,7 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
     if (type == Unusual) {
         
         for (var index = 0; index < arrayLength; index++) {
-            if (columnCoordinate + possibleArray[index][0] <= board.height && rowCoordinate + possibleArray[index][1] <= board.height 
+            if (columnCoordinate + possibleArray[index][0] <= board.height && rowCoordinate + possibleArray[index][1] <= board.width 
                 && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
                     colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Green]);
                 }
@@ -25,15 +26,12 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
 
         if (rowCoordinate == specialPosition) {    
             for (var index = 0; index < specialArrayLength; index++) {
-                if (columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.height 
+                if (columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.width 
                     && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
                         colorArray.push([columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1], Green]);
                     }
             } 
         }
-
-        //gives moves
-        moves(colorArray);
 
         //changes view
         changeColor(colorArray);
@@ -51,9 +49,12 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
             columnIndex = columnCoordinate;
             rowIndex = rowCoordinate;
 
-            while (columnIndex < board.width && rowIndex < board.height  && columnIndex > 1 && rowIndex > 1) {
+            while (columnIndex <= board.width && rowIndex <= board.height  && columnIndex > 0 && rowIndex > 0) {
                 columnIndex += move[0];
                 rowIndex += move[1];
+                if (columnIndex > board.width || rowIndex > board.height || columnIndex < 1 || rowIndex < 1) {
+                    break;
+                }
                 colorArray.push([columnIndex, rowIndex, Green]);
                 checker++;
 
@@ -62,6 +63,7 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
                     break;
                 }
             }
+            checker = 0;
         }
     }
 
@@ -75,9 +77,12 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
             columnIndex = columnCoordinate;
             rowIndex = rowCoordinate;
             
-            while (columnIndex < board.width && rowIndex < board.height  && columnIndex > 1 && rowIndex > 1) {
+            while (columnIndex <= board.width && rowIndex <= board.height  && columnIndex > 0 && rowIndex > 0) {
                 columnIndex += move[0];
                 rowIndex += move[1];
+                if (columnIndex > board.width || rowIndex > board.height || columnIndex < 1 || rowIndex < 1) {
+                    break;
+                }
                 colorArray.push([columnIndex, rowIndex, Green]);
                 checker++;
 
@@ -86,12 +91,10 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
                     break;
                 }
             }
+            checker = 0;
         }
     }
 
-
-    //gives moves
-    moves(colorArray);
 
     //changes view
     changeColor(colorArray);

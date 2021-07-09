@@ -1,5 +1,6 @@
 const Black = "black"; 
 const White = "white"; 
+const Blue = "blue";
 const Green = "green"; 
 const Brown = "brown";
 const Yellow = "yellow";
@@ -31,3 +32,5 @@ const Tray = "tray ";
 const Letters = "letters";
 const HorizontalMoves = [[0, 1], [1, 0], [0, -1], [-1, 0]];
 const DiagonalMoves = [[1, 1], [1, -1], [-1, -1], [-1, 1]];
+const Eight = 8;
+const TrayClass = ".tray";

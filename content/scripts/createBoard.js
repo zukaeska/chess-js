@@ -3,6 +3,9 @@ const Table = "<table></table>";
 const Tr = "<tr></tr>";
 const Th = "<th class='numbers'></th>";
 
+$(function () {
+    createTable();
+});
 
 function createTable() {
     var rowIndex;
@@ -60,6 +63,10 @@ function createTable() {
     $(table).append(tr);
 
     $(TableDivId).append(table);
+
+    board.createArray();
+
+    positioning(mainObject);
 }
 
 
