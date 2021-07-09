@@ -1,9 +1,12 @@
 var checker = 0;
 var colorArray = [];
 var previousPiece;
+var pieceColor;
 
 //counts possible moves of pieces
 function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit) { 
+
+    checkColor(columnCoordinate, rowCoordinate);
 
     reset();
 
@@ -20,16 +23,35 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
         for (var index = 0; index < arrayLength; index++) {
             if (columnCoordinate + possibleArray[index][0] <= board.height && rowCoordinate + possibleArray[index][1] <= board.width 
                 && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
+                
+                if (checkArray(columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1])) {
+
                     colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Green]);
+                }else {
+                    
+                    if (checkEnemy(columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1])){
+
+                        colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Blue]);
+                    }
                 }
+            }
         }
 
         if (rowCoordinate == specialPosition) {    
             for (var index = 0; index < specialArrayLength; index++) {
                 if (columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.width 
                     && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
+                    if (checkArray(columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1])) {
+
                         colorArray.push([columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1], Green]);
+                    }else {
+
+                        if (checkEnemy(columnCoordinate + arraySpecial[index][0], arraySpecial + possibleArray[index][1])){
+
+                            colorArray.push([columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1], Blue]);
+                        }
                     }
+                }
             } 
         }
 
@@ -55,7 +77,16 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
                 if (columnIndex > board.width || rowIndex > board.height || columnIndex < 1 || rowIndex < 1) {
                     break;
                 }
-                colorArray.push([columnIndex, rowIndex, Green]);
+                if (checkArray(columnIndex, rowIndex)) {
+                    colorArray.push([columnIndex, rowIndex, Green]);
+                }else {
+                    if (checkEnemy(columnIndex, rowIndex)){
+                        colorArray.push([columnIndex, rowIndex, Blue]);
+                        break;
+                    }else {
+                        break;
+                    }
+                }
                 checker++;
 
                 if (checker == limit) {
@@ -83,7 +114,16 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
                 if (columnIndex > board.width || rowIndex > board.height || columnIndex < 1 || rowIndex < 1) {
                     break;
                 }
-                colorArray.push([columnIndex, rowIndex, Green]);
+                if (checkArray(columnIndex, rowIndex)) {
+                    colorArray.push([columnIndex, rowIndex, Green]);
+                }else {
+                    if (checkEnemy(columnIndex, rowIndex)){
+                        colorArray.push([columnIndex, rowIndex, Blue]);
+                        break;
+                    }else {
+                        break;
+                    }
+                }
                 checker++;
 
                 if (checker == limit) {
@@ -101,3 +141,23 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
 }
 
 
+//checks array is empty or not
+function checkArray(columnIndex, rowIndex) {
+    if (board.array[columnIndex][rowIndex] === undefined || board.array[columnIndex][rowIndex] == 0) {
+        return true;
+    }
+}
+
+//checks piece is enemy or not
+function checkEnemy(columnIndex, rowIndex) { 
+    if (board.array[columnIndex][rowIndex].color == pieceColor) {
+        return false;
+    }else {
+        return true;
+    }
+}
+
+//checks starting piece color
+function checkColor (columnIndex, rowIndex) {
+    return pieceColor = board.array[columnIndex][rowIndex].color;
+}
