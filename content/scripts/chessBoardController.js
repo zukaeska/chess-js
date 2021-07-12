@@ -2,9 +2,11 @@ var checker = 0;
 var colorArray = [];
 var previousPiece;
 var pieceColor;
+var limiter;
+
 
 //counts possible moves of pieces
-function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit) { 
+function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit, killType, killMove, killArrayLength) { 
 
     checkColor(columnCoordinate, rowCoordinate);
 
@@ -19,36 +21,55 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
 
     //for unusual type of pieces
     if (type == Unusual) {
-        
+        limiter = 0;
         for (var index = 0; index < arrayLength; index++) {
             if (columnCoordinate + possibleArray[index][0] <= board.height && rowCoordinate + possibleArray[index][1] <= board.width 
                 && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
-                
+                if (killType == Unusual) {
+                    
+                    for (var killIndex = 0; killIndex < killArrayLength; killIndex++) {
+                        
+                        if (!checkArray(columnCoordinate + killMove[killIndex][0], rowCoordinate + killMove[killIndex][1])) {
+                            colorArray.push([columnCoordinate + killMove[killIndex][0], rowCoordinate + killMove[killIndex][1], Blue]);
+                        }
+                    }
+                }    
                 if (checkArray(columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1])) {
 
                     colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Green]);
                 }else {
-                    
-                    if (checkEnemy(columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1])){
 
-                        colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Blue]);
+                    if (killType == Direct){
+
+                        if (checkEnemy(columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1])){
+
+                            colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Blue]);
+                        }
+                    }else {
+                        limiter++;
+                        break;
                     }
                 }
             }
         }
 
-        if (rowCoordinate == specialPosition) {    
+        if (rowCoordinate == specialPosition && limiter == 0) {   
             for (var index = 0; index < specialArrayLength; index++) {
-                if (columnCoordinate + possibleArray[index][0] < board.height && rowCoordinate + possibleArray[index][1] < board.width 
-                    && columnCoordinate + possibleArray[index][0] > 0 && rowCoordinate + possibleArray[index][1] > 0) {
-                    if (checkArray(columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1])) {
+                if (columnCoordinate + arraySpecial[index][0] <= board.height && rowCoordinate + arraySpecial[index][1] <= board.width 
+                    && columnCoordinate + arraySpecial[index][0] > 0 && rowCoordinate + arraySpecial[index][1] > 0) {
+                        if (checkArray(columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1])) {
 
                         colorArray.push([columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1], Green]);
                     }else {
 
-                        if (checkEnemy(columnCoordinate + arraySpecial[index][0], arraySpecial + possibleArray[index][1])){
+                        if (killType == Direct){
+                            
+                            if (checkEnemy(columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1])){
 
-                            colorArray.push([columnCoordinate + arraySpecial[index][0], rowCoordinate + arraySpecial[index][1], Blue]);
+                                colorArray.push([columnCoordinate + possibleArray[index][0], rowCoordinate + possibleArray[index][1], Blue]);
+                            }else {
+                                break;
+                            }
                         }
                     }
                 }
@@ -140,8 +161,10 @@ function possibleMoves(type, columnCoordinate, rowCoordinate, specialArrayLength
 
 //checks array is empty or not
 function checkArray(columnIndex, rowIndex) {
-    if (board.array[columnIndex][rowIndex] === undefined || board.array[columnIndex][rowIndex] == 0) {
-        return true;
+    if (board.array[columnIndex] !== undefined){
+        if (board.array[columnIndex][rowIndex] === undefined || board.array[columnIndex][rowIndex] == 0) {
+            return true;
+        }
     }
 }
 

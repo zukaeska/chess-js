@@ -34,3 +34,4 @@ const HorizontalMoves = [[0, 1], [1, 0], [0, -1], [-1, 0]];
 const DiagonalMoves = [[1, 1], [1, -1], [-1, -1], [-1, 1]];
 const Eight = 8;
 const TrayClass = ".tray";
+const Direct = "direct";

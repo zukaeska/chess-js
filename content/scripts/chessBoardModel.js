@@ -26,20 +26,23 @@ class Pawn extends Piece {
         this.letter = letter;
         this.number = number;
         this.type = Unusual;
-        this.limit = Infinity; 
+        this.limit = Infinity;
+        this.killType = Unusual; 
     }
     special() {
         if (this.color == White) {
             return [
                     this.possibleMoves = [[0, 1]],
                     this.specialMove = [[0, 2]],
-                    this.specialPosition = 2
+                    this.specialPosition = 2,
+                    this.killMove = [[-1, 1], [1, 1]]
                 ]
         }else {
             return [
                     this.possibleMoves = [[0, -1]],
                     this.specialMove = [[0, -2]],
-                    this.specialPosition = board.height - 1
+                    this.specialPosition = board.height - 1,
+                    this.killMove = [[-1, -1], [1, -1]]
                 ]
         }
     }
@@ -52,7 +55,8 @@ class Knight extends Piece {
         this.letter = letter;
         this.number = number;
         this.type = Unusual;
-        this.limit = Infinity; 
+        this.limit = Infinity;
+        this.killType = Direct;  
         
     }
     special() {
@@ -72,9 +76,7 @@ class Bishop extends Piece {
         this.number = number;
         this.type = Diagonal;
         this.limit = Infinity; 
-        this.possibleMoves = [0, 0];
-        this.specialMove = [0, 0];
-        this.specialPosition = 0;
+        this.killType = Direct; 
     }
     special() {
         return [
@@ -93,6 +95,7 @@ class King extends Piece {
         this.number = number;
         this.type = Both;
         this.limit = 1;  
+        this.killType = Direct; 
     }
     special() {
         return [
@@ -108,7 +111,8 @@ class Queen extends Piece {
         this.letter = letter;
         this.number = number;
         this.type = Both;
-        this.limit = Infinity;  
+        this.limit = Infinity; 
+        this.killType = Direct;  
     }
     special() {
         return [
@@ -126,7 +130,8 @@ class Rook extends Piece {
         this.letter = letter;
         this.number = number;
         this.type = Horizontal;
-        this.limit = Infinity; 
+        this.limit = Infinity;
+        this.killType = Direct;  
     }
     special() {
         return [
