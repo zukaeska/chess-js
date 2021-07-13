@@ -50,16 +50,12 @@ $(function () {
             var type = object.type;
             var limit = object.limit;
             var killType = object.killType;
-            if (killType == Unusual) {
-                var killMove = object.special()[3];
-                var killArrayLength = object.special()[3].length;
-            }
-            var specialArrayLength = object.special()[1].length;
-            var arrayLength = object.special()[0].length;
-            var arraySpecial = object.special()[1];
-            var possibleArray = object.special()[0];
-            var specialPosition = object.special()[2];
-            possibleMoves(type, columnNumber, rowNumber, specialArrayLength, arrayLength, arraySpecial, possibleArray, specialPosition, limit, killType, killMove, killArrayLength);
+            // var killMove = object.getMove()[1];
+            // var killArrayLength = object.getMove()[1].length;
+            // var arrayLength = object.getMove()[0].length;
+            // var possibleArray = object.getMove()[0];
+            console.log(object.getMove())
+            // possibleMoves(type, columnNumber, rowNumber, arrayLength, possibleArray, limit, killType, killMove, killArrayLength);
         }
         // freeMove(id);
         
