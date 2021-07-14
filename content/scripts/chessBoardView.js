@@ -43,19 +43,11 @@ function reset() {
 $(function () {
     $(TrayClass).click(function() {
         var id = this.id;
-        if(document.getElementById(id).firstChild !== undefined && document.getElementById(id).firstChild !== null){
-            var columnNumber = parseInt(id.split(Underscore)[0].charCodeAt(0) - 64);
-            var rowNumber = parseInt(id.split(Underscore)[1]);
+        var columnNumber = parseInt(id.split(Underscore)[0].charCodeAt(0) - 64);
+        var rowNumber = parseInt(id.split(Underscore)[1]);
+        if(board.array[columnNumber][rowNumber] != 0){
             var object = board.array[columnNumber][rowNumber]
-            var type = object.type;
-            var limit = object.limit;
-            var killType = object.killType;
-            // var killMove = object.getMove()[1];
-            // var killArrayLength = object.getMove()[1].length;
-            // var arrayLength = object.getMove()[0].length;
-            // var possibleArray = object.getMove()[0];
-            console.log(object.getMove())
-            // possibleMoves(type, columnNumber, rowNumber, arrayLength, possibleArray, limit, killType, killMove, killArrayLength);
+            getMoves(object);
         }
         // freeMove(id);
         

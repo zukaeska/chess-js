@@ -3,6 +3,13 @@ var mainObject = JSON.parse(startingPosition);
 
 function positioning(object){
     var quantity = object.positions.quantity;
+    for (columnIndex = 1; columnIndex < 9; columnIndex++) {
+
+        for (rowIndex = 1; rowIndex < 9; rowIndex++) {
+            board.array[columnIndex][rowIndex] = 0;
+        }
+    }
+
     for (number = 0; number < quantity; number++) {
         var pieceName = object.positions.pieces[number].name;
         var color = pieceName.split(Underscore)[0];

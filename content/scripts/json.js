@@ -51,7 +51,7 @@ var startingPosition = `{
                 "name":"black_bishop"
             },
             {
-                "position":"D_4",
+                "position":"D_1",
                 "name":"white_queen"
             },
             {
