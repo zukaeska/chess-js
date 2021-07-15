@@ -95,7 +95,7 @@ function animate(starting, ending, piece) {
     var lengthTop = endCoordinate.top - startCoordinate.top;
     var lengthLeft = endCoordinate.left - startCoordinate.left
      $(piece).css("position","relative")
-     .animate({top:'+=' + lengthTop + 'px',left:'+=' + lengthLeft + 'px'},100,function(){ 
+     .animate({top:'+=' + lengthTop + 'px',left:'+=' + lengthLeft + 'px'},200,function(){ 
          endPlace.append(piece);
         $(piece).css("position","static");
         $(piece).css({top: 0, left: 0});
