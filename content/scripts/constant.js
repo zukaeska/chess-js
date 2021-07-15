@@ -34,3 +34,7 @@ const Moves = [[0, 1], [1, 0], [0, -1], [-1, 0], [1, -1], [1, 1], [-1, -1], [-1,
 const Eight = 8;
 const TrayClass = ".tray";
 const Direct = "direct";
+const Player1 = "#player1";
+const Player2 = "#player2";
+const Names = "#names";
+const Page = "#page";

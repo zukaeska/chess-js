@@ -101,3 +101,26 @@ function animate(starting, ending, piece) {
         $(piece).css({top: 0, left: 0});
     });
 }
+
+$(function () {
+    $(Player1).css({
+        "width" : "150px",
+        "height" : "150px",
+        "background-color" : Brown,
+        "position" : "absolute",
+        "margin-top" : "340px",
+        "margin-left" : "100px"
+    });
+    $(Player2).css({
+        "width" : "150px",
+        "height" : "150px",
+        "background-color" : White,
+        "position" : "absolute",
+        "margin-top" : "350px",
+        "margin-left" : "1250px"
+    });
+    $(Page).css({
+        "width" : "1500px",
+        "height" : "1500px"
+    })
+});
