@@ -57,14 +57,37 @@ function freeMove(id){
         var endingPiece = document.getElementById(endingId).firstChild;
 
         for (var index in colorArray) {
-
             if (firstNumber == colorArray[index][0] && secondNumber == colorArray[index][1] && colorArray[index][2] != Yellow) {
-    
+
+                if (colorArray[index][3] == Castling) {
+                    if (colorArray[index][0] == 2) {
+                        var rookId = String.fromCharCode(colorArray[index][0] - 1 + 64) + Underscore + colorArray[index][1];
+                        var endId = String.fromCharCode(colorArray[index][0] + 1 + 64) + Underscore + colorArray[index][1];
+                    } else {
+                        var rookId = String.fromCharCode(colorArray[index][0] + 1 + 64) + Underscore + colorArray[index][1];
+                        var endId = String.fromCharCode(colorArray[index][0] - 1 + 64) + Underscore + colorArray[index][1];
+                    }
+                    var rookPiece = document.getElementById(rookId).firstChild;
+                    var columnCoordinate = parseInt(rookId.split(Underscore)[0].charCodeAt(0)-64);
+                    var rowCoordinate = parseInt(rookId.split(Underscore)[1]);
+                    var endColumnCoordinate = parseInt(endId.split(Underscore)[0].charCodeAt(0)-64);
+                    var endRowCoordinate = parseInt(endId.split(Underscore)[1]);
+                    
+                    board.array[endColumnCoordinate][endRowCoordinate] = board.array[columnCoordinate][rowCoordinate];
+                    board.array[endColumnCoordinate][endRowCoordinate].letter = rookId.split(Underscore)[0];
+                    board.array[endColumnCoordinate][endRowCoordinate].number = parseInt(rookId.split(Underscore)[1]);
+                    board.array[endColumnCoordinate][endRowCoordinate].countMove++;
+                    board.array[columnCoordinate][rowCoordinate] == 0;
+
+                    animate(rookId, endId, rookPiece);
+                }
+
                 board.array[firstNumber][secondNumber] = board.array[colorArray[0][0]][colorArray[0][1]];
                 board.array[firstNumber][secondNumber].letter = id.split(Underscore)[0];
                 board.array[firstNumber][secondNumber].number = parseInt(id.split(Underscore)[1]);
                 board.array[firstNumber][secondNumber].countMove++;
                 board.array[colorArray[0][0]][colorArray[0][1]] = 0;
+
                 animate(startingId, endingId, piece);
     
                 if (colorArray[index][2] == Blue) {

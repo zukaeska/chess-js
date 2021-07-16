@@ -265,7 +265,7 @@ class King extends SamePieces {
 
             if ((columnIndex == 1 || columnIndex == 8) && !this.checkArray(columnIndex, rowIndex)
                 && this.array[columnIndex][rowIndex].countMove == 0) {
-                this.possibleMoves.push([columnIndex + checker, rowIndex, Green])
+                this.possibleMoves.push([columnIndex + checker, rowIndex, Green, Castling])
             }
             checker = 1;
         }

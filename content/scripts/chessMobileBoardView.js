@@ -66,7 +66,6 @@ function freeMove(id){
                 board.array[firstNumber][secondNumber].countMove++;
                 board.array[colorArray[0][0]][colorArray[0][1]] = 0;
 
-                // if ()
                 animate(startingId, endingId, piece);
     
                 if (colorArray[index][2] == Blue) {
