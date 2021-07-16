@@ -274,11 +274,14 @@ class King extends SamePieces {
     kingDanger() {
         for (var columnIndex = 1; columnIndex < 9; columnIndex++) {
             for (var rowIndex = 1; rowIndex < 9; rowIndex++) {
-                if (this.array[columnIndex][rowIndex] != 0) {
+                if (this.array[columnIndex][rowIndex] != 0 && this.array[columnIndex][rowIndex].color != this.color) {
                     var pieceArray = this.array[columnIndex][rowIndex].getMove();
-
                     for (var index in pieceArray) {
-                        
+                        for (var moveIndex in this.possibleMoves) {
+                            if (pieceArray[index][0] == this.possibleMoves[moveIndex][0] && pieceArray[index][1] == this.possibleMoves[moveIndex][1]) {
+                                console.log(pieceArray[index][0], pieceArray[index][1])
+                            }
+                        }
                     }
                 }
             }
