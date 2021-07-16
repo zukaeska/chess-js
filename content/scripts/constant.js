@@ -38,3 +38,5 @@ const Player1 = "#player1";
 const Player2 = "#player2";
 const Names = "#names";
 const Page = "#page";
+const rookMoves = [[1, 0], [-1, 0]];
+const Two = 2;

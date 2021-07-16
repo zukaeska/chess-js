@@ -15,17 +15,41 @@ class Board {
 
 
 class Piece {
-    constructor(color, name) {
+
+    constructor(color, name, array) {
         this.color = color;
         this.name = name;
+        this.array = array;
+    }
+
+    checkArray(columnIndex, rowIndex) {
+
+        if (this.array[columnIndex] !== undefined) {
+    
+            if (this.array[columnIndex][rowIndex] == 0) {
+                return true;
+            }
+        }
+    }
+
+    checkEnemy(columnIndex, rowIndex) {
+
+        if (this.array[columnIndex] !== undefined && this.array[columnIndex][rowIndex] !== undefined) {
+    
+            if (this.array[columnIndex][rowIndex].color == this.color) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 }
 
 
 class SamePieces extends Piece {
 
-    constructor(color, name) {
-        super(color, name)
+    constructor(color, name, array) {
+        super(color, name, array)
     }
 
     moves() {
@@ -47,8 +71,6 @@ class SamePieces extends Piece {
             }
         }
 
-        checkColor(columnCoordinate, rowCoordinate);
-
         for (var index = begin; index < end; index++) {
             var move = Moves[index];
             var columnIndex = columnCoordinate;
@@ -61,10 +83,10 @@ class SamePieces extends Piece {
                     break;
                 }
 
-                if (checkArray(columnIndex, rowIndex)) {
+                if (this.checkArray(columnIndex, rowIndex)) {
                     possibleMoves.push([columnIndex, rowIndex, Green]);
                 } else {
-                    if (checkEnemy(columnIndex, rowIndex)) {
+                    if (this.checkEnemy(columnIndex, rowIndex)) {
                         possibleMoves.push([columnIndex, rowIndex, Blue]);
                         break;
                     } else {
@@ -80,20 +102,23 @@ class SamePieces extends Piece {
             }
             checker = 0;
         }
-        return possibleMoves;
+
+        this.possibleMoves = possibleMoves;
     }
 }
 
 
 class Pawn extends Piece {
 
-    constructor(color, name, letter, number) {
-        super(color, name);
+    constructor(color, name, array, letter, number) {
+        super(color, name, array);
         this.letter = letter;
         this.number = number;
         this.type = Unusual;
         this.limit = Infinity;
         this.killType = Unusual;
+        this.countMove = 0;
+        this.possibleMoves = [];
     }
 
     getMove() {
@@ -102,8 +127,6 @@ class Pawn extends Piece {
         var moves = [];
         var killMove = [];
         moves.push([columnCoordinate, rowCoordinate, Yellow]);
-
-        checkColor(columnCoordinate, rowCoordinate)
 
         if (this.color == White) {
             this.specialPosition = 2;
@@ -127,7 +150,7 @@ class Pawn extends Piece {
 
         for (var index = 0; index < this.possibleMoves.length; index++) {
 
-            if (checkArray(columnCoordinate + this.possibleMoves[index][0], rowCoordinate + this.possibleMoves[index][1])) {
+            if (this.checkArray(columnCoordinate + this.possibleMoves[index][0], rowCoordinate + this.possibleMoves[index][1])) {
                 moves.push([columnCoordinate + this.possibleMoves[index][0], rowCoordinate + this.possibleMoves[index][1], Green]);
             } else {
                 break;
@@ -136,8 +159,8 @@ class Pawn extends Piece {
 
         for (var index = 0; index < killMove.length; index++) {
 
-            if (!checkArray(columnCoordinate + killMove[index][0], rowCoordinate + killMove[index][1])) {
-                if (checkEnemy(columnCoordinate + killMove[index][0], rowCoordinate + killMove[index][1])) {
+            if (!this.checkArray(columnCoordinate + killMove[index][0], rowCoordinate + killMove[index][1])) {
+                if (this.checkEnemy(columnCoordinate + killMove[index][0], rowCoordinate + killMove[index][1])) {
                     moves.push([columnCoordinate + killMove[index][0], rowCoordinate + killMove[index][1], Blue]);
                 }
             }
@@ -150,13 +173,15 @@ class Pawn extends Piece {
 
 class Knight extends Piece {
 
-    constructor(color, name, letter, number) {
-        super(color, name);
+    constructor(color, name, array, letter, number) {
+        super(color, name, array);
         this.letter = letter;
         this.number = number;
         this.type = Unusual;
         this.limit = Infinity;
         this.killType = Direct;
+        this.countMove = 0;
+        this.possibleMoves = [];
 
     }
 
@@ -167,13 +192,11 @@ class Knight extends Piece {
         var possibleMoves = [[1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1], [-2, 1], [-1, 2]];
         moves.push([columnCoordinate, rowCoordinate, Yellow]);
 
-        checkColor(columnCoordinate, rowCoordinate);
-
         for (var index = 0; index < possibleMoves.length; index++) {
-            if (checkArray(columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1])) {
+            if (this.checkArray(columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1])) {
                 moves.push([columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1], Green]);
             } else {
-                if (checkEnemy(columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1])) {
+                if (this.checkEnemy(columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1])) {
                     moves.push([columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1], Blue])
                 }
             }
@@ -186,111 +209,105 @@ class Knight extends Piece {
 
 class Bishop extends SamePieces {
 
-    constructor(color, name, letter, number) {
-        super(color, name);
+    constructor(color, name, array, letter, number) {
+        super(color, name, array);
         this.letter = letter;
         this.number = number;
         this.type = Diagonal;
         this.limit = Infinity;
         this.killType = Direct;
+        this.countMove = 0;
+        this.possibleMoves = [];
     }
 
     getMove() {
-        return this.moves();
+        this.moves();
+        return this.possibleMoves;
     }
 }
 
 
 class King extends SamePieces {
 
-    constructor(color, name, letter, number) {
-        super(color, name);
+    constructor(color, name, array, letter, number) {
+        super(color, name, array);
         this.letter = letter;
         this.number = number;
         this.type = Both;
         this.limit = 1;
         this.killType = Direct;
+        this.countMove = 0;
+        this.possibleMoves = [];
     }
 
     getMove() {
-        return this.moves();
+        this.moves();
+        if (this.countMove == 0) {
+            this.possibleRook();
+        }
+        
+        return this.possibleMoves;
+    }
+
+    possibleRook() {
+        var columnCoordinate = this.letter.charCodeAt(0) - 64;
+        var rowCoordinate = this.number;
+        var checker = -1;
+        for (var index = 0; index < Two; index++) {
+            var columnIndex = columnCoordinate;
+            var rowIndex = rowCoordinate; 
+            var move = rookMoves[index];
+            columnIndex += move[0];
+
+            while (columnIndex < board.width && columnIndex > 1 && this.checkArray(columnIndex, rowIndex)) {
+                columnIndex += move[0];
+            }
+
+            if ((columnIndex == 1 || columnIndex == 8) && !this.checkArray(columnIndex, rowIndex)
+                && this.array[columnIndex][rowIndex].countMove == 0) {
+                this.possibleMoves.push([columnIndex + checker, rowIndex, Green])
+            }
+            checker = 1;
+        }
     }
 }
 
 
 class Queen extends SamePieces {
 
-    constructor(color, name, letter, number) {
-        super(color, name);
+    constructor(color, name, array, letter, number) {
+        super(color, name, array);
         this.letter = letter;
         this.number = number;
         this.type = Both;
         this.limit = Infinity;
         this.killType = Direct;
+        this.countMove = 0;
+        this.possibleMoves = [];
     }
 
     getMove() {
-        return this.moves();
+        this.moves();
+        return this.possibleMoves;
     }
 }
 
 
 class Rook extends SamePieces {
 
-    constructor(color, name, letter, number) {
-        super(color, name);
+    constructor(color, name, array, letter, number) {
+        super(color, name, array); 
         this.letter = letter;
         this.number = number;
         this.type = Horizontal;
         this.limit = Infinity;
         this.killType = Direct;
+        this.countMove = 0;
+        this.possibleMoves = [];
     }
 
     getMove() {
-        return this.moves();
+        this.moves();
+        return this.possibleMoves;
     }
 }
-
-
-//class objects
-var pieces = {
-    "pawn": Pawn,
-    "knight": Knight,
-    "rook": Rook,
-    "queen": Queen,
-    "king": King,
-    "bishop": Bishop
-}
-var board = new Board(Eight, Eight);
-
-
-//checks array is empty or not
-function checkArray(columnIndex, rowIndex) {
-
-    if (board.array[columnIndex] !== undefined) {
-
-        if (board.array[columnIndex][rowIndex] == 0) {
-            return true;
-        }
-    }
-}
-
-//checks piece is enemy or not
-function checkEnemy(columnIndex, rowIndex) {
-
-    if (board.array[columnIndex] !== undefined && board.array[columnIndex][rowIndex] !== undefined) {
-
-        if (board.array[columnIndex][rowIndex].color == pieceColor) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-}
-
-//checks starting piece color
-function checkColor(columnIndex, rowIndex) {
-    return pieceColor = board.array[columnIndex][rowIndex].color;
-}
-
-var pieceColor;

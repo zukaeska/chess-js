@@ -2,17 +2,6 @@ var insert = document.getElementById(Id);
 var brownCell = document.getElementsByClassName(Brown);
 var whiteCell = document.getElementsByClassName(White);
 
-function getName(color, name) {
-    return color + Underscore + name;
-}
-
-function coordinate(first, second) {
-    return first + Underscore + second;
-}
-
-function getLetter(index) {
-    return String.fromCharCode(index + 64);
-}
 
  //changes background color
 function changeColor(colorArray) {
@@ -66,14 +55,18 @@ function freeMove(id){
         var endingId = String.fromCharCode(firstNumber + 64) + Underscore + secondNumber;
         var piece = document.getElementById(startingId).firstChild;
         var endingPiece = document.getElementById(endingId).firstChild;
+
         for (var index in colorArray) {
+
             if (firstNumber == colorArray[index][0] && secondNumber == colorArray[index][1] && colorArray[index][2] != Yellow) {
     
                 board.array[firstNumber][secondNumber] = board.array[colorArray[0][0]][colorArray[0][1]];
                 board.array[firstNumber][secondNumber].letter = id.split(Underscore)[0];
                 board.array[firstNumber][secondNumber].number = parseInt(id.split(Underscore)[1]);
+                board.array[firstNumber][secondNumber].countMove++;
                 board.array[colorArray[0][0]][colorArray[0][1]] = 0;
-                
+
+                // if ()
                 animate(startingId, endingId, piece);
     
                 if (colorArray[index][2] == Blue) {

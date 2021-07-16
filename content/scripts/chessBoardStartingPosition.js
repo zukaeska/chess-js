@@ -23,6 +23,6 @@ function positioning(object){
         child.src = Location + pieceName + Png;
         child.className = pieceName;
         parent.appendChild(child);
-        board.array[columnNumber][rownNumber] = new pieces[name](color, name, letter, rownNumber);
+        board.array[columnNumber][rownNumber] = new pieces[name](color, name, board.array, letter, rownNumber);
     }
 }
