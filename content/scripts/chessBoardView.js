@@ -40,7 +40,7 @@ $(function () {
 
         if(board.array[columnNumber][rowNumber] != 0){
             var object = board.array[columnNumber][rowNumber];
-
+            
             getMoves(object);
         }   
     });
@@ -72,7 +72,7 @@ function freeMove(id){
                     var rowCoordinate = parseInt(rookId.split(Underscore)[1]);
                     var endColumnCoordinate = parseInt(endId.split(Underscore)[0].charCodeAt(0)-64);
                     var endRowCoordinate = parseInt(endId.split(Underscore)[1]);
-                    
+
                     board.array[endColumnCoordinate][endRowCoordinate] = board.array[columnCoordinate][rowCoordinate];
                     board.array[endColumnCoordinate][endRowCoordinate].letter = rookId.split(Underscore)[0];
                     board.array[endColumnCoordinate][endRowCoordinate].number = parseInt(rookId.split(Underscore)[1]);

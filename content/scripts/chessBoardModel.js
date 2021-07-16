@@ -270,6 +270,20 @@ class King extends SamePieces {
             checker = 1;
         }
     }
+    
+    kingDanger() {
+        for (var columnIndex = 1; columnIndex < 9; columnIndex++) {
+            for (var rowIndex = 1; rowIndex < 9; rowIndex++) {
+                if (this.array[columnIndex][rowIndex] != 0) {
+                    var pieceArray = this.array[columnIndex][rowIndex].getMove();
+
+                    for (var index in pieceArray) {
+                        
+                    }
+                }
+            }
+        }
+    }
 }
 
 
