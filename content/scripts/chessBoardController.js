@@ -27,6 +27,7 @@ function getMoves(object) {
 
 
 function turn(){
+    
     if (turnIndex % 2 == 0) {return White;}
     else {return Black} 
 }
