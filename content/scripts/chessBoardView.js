@@ -10,7 +10,7 @@ function changeColor(colorArray) {
         var first = String.fromCharCode(colorArray[index][0] + 64);
         var second = colorArray[index][1];
         var color = colorArray[index][2];
-        if (document.getElementById(first + Underscore + second) !== null) {
+        if (document.getElementById(first + Underscore + second) !== null && color != None) {
             document.getElementById(first + Underscore + second).style.backgroundColor = color ;
         }   
     }
@@ -57,7 +57,8 @@ function freeMove(id){
         var endingPiece = document.getElementById(endingId).firstChild;
 
         for (var index in colorArray) {
-            if (firstNumber == colorArray[index][0] && secondNumber == colorArray[index][1] && colorArray[index][2] != Yellow) {
+            if (firstNumber == colorArray[index][0] && secondNumber == colorArray[index][1] 
+                && colorArray[index][2] != Yellow && colorArray[index][2] != None) {
 
                 if (colorArray[index][3] == Castling) {
                     if (colorArray[index][0] == 2) {
@@ -73,12 +74,13 @@ function freeMove(id){
                     var endColumnCoordinate = parseInt(endId.split(Underscore)[0].charCodeAt(0)-64);
                     var endRowCoordinate = parseInt(endId.split(Underscore)[1]);
 
-                    board.array[endColumnCoordinate][endRowCoordinate] = board.array[columnCoordinate][rowCoordinate];
-                    board.array[endColumnCoordinate][endRowCoordinate].letter = rookId.split(Underscore)[0];
-                    board.array[endColumnCoordinate][endRowCoordinate].number = parseInt(rookId.split(Underscore)[1]);
-                    board.array[endColumnCoordinate][endRowCoordinate].countMove++;
-                    board.array[columnCoordinate][rowCoordinate] == 0;
 
+                    board.array[endColumnCoordinate][endRowCoordinate] = board.array[columnCoordinate][rowCoordinate];
+                    board.array[endColumnCoordinate][endRowCoordinate].letter = endId.split(Underscore)[0];
+                    board.array[endColumnCoordinate][endRowCoordinate].number = parseInt(endId.split(Underscore)[1]);
+                    board.array[endColumnCoordinate][endRowCoordinate].countMove++;
+                    board.array[columnCoordinate][rowCoordinate] = 0;
+                    console.log(board.array[endColumnCoordinate][endRowCoordinate],board.array[columnCoordinate][rowCoordinate])
                     animate(rookId, endId, rookPiece);
                 }
 

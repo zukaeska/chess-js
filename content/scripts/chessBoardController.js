@@ -19,10 +19,6 @@ function getMoves(object) {
      }
 
     reset();
-     if (object.name == KingName) {
-         object.getMove();
-        console.log(object.kingDanger())
-     }
 
     colorArray = object.getMove();
 

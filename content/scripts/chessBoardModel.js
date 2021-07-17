@@ -52,7 +52,7 @@ class SamePieces extends Piece {
         super(color, name, array)
     }
 
-    moves() {
+    move() {
         var begin = 0;
         var end = 8;
         var possibleMoves = [];
@@ -84,12 +84,13 @@ class SamePieces extends Piece {
                 }
 
                 if (this.checkArray(columnIndex, rowIndex)) {
-                    possibleMoves.push([columnIndex, rowIndex, Green]);
+                    possibleMoves.push([columnIndex, rowIndex, Green, Danger]);
                 } else {
                     if (this.checkEnemy(columnIndex, rowIndex)) {
                         possibleMoves.push([columnIndex, rowIndex, Blue]);
                         break;
                     } else {
+                        possibleMoves.push([columnIndex, rowIndex, None, Danger])
                         break;
                     }
                 }
@@ -122,6 +123,10 @@ class Pawn extends Piece {
     }
 
     getMove() {
+        return this.moves();
+    }
+
+    moves() {
         var columnCoordinate = this.letter.charCodeAt(0) - 64;
         var rowCoordinate = this.number;
         var moves = [];
@@ -164,6 +169,7 @@ class Pawn extends Piece {
                     moves.push([columnCoordinate + killMove[index][0], rowCoordinate + killMove[index][1], Blue]);
                 }
             }
+            moves.push([columnCoordinate + killMove[index][0], rowCoordinate + killMove[index][1], None, Danger]);
         }
 
         return moves;
@@ -186,6 +192,10 @@ class Knight extends Piece {
     }
 
     getMove() {
+        return this.moves();
+    }
+
+    moves() {
         var columnCoordinate = this.letter.charCodeAt(0) - 64;
         var rowCoordinate = this.number;
         var moves = [];
@@ -194,11 +204,11 @@ class Knight extends Piece {
 
         for (var index = 0; index < possibleMoves.length; index++) {
             if (this.checkArray(columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1])) {
-                moves.push([columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1], Green]);
+                moves.push([columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1], Green, Danger]);
             } else {
                 if (this.checkEnemy(columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1])) {
                     moves.push([columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1], Blue])
-                }
+                } else moves.push([columnCoordinate + possibleMoves[index][0], rowCoordinate + possibleMoves[index][1], None, Danger])
             }
         }
 
@@ -220,8 +230,13 @@ class Bishop extends SamePieces {
         this.possibleMoves = [];
     }
 
+    moves() {
+        this.move();
+        return this.possibleMoves;;
+    }
+
     getMove() {
-        this.moves();
+        this.move();
         return this.possibleMoves;
     }
 }
@@ -240,12 +255,18 @@ class King extends SamePieces {
         this.possibleMoves = [];
     }
 
+    moves() {
+        this.move();
+        return this.possibleMoves;
+    }
+
     getMove() {
-        this.moves();
+        this.move();
         if (this.countMove == 0) {
             this.possibleRook();
         }
-        
+        this.kingDanger();
+
         return this.possibleMoves;
     }
 
@@ -265,7 +286,8 @@ class King extends SamePieces {
 
             if ((columnIndex == 1 || columnIndex == 8) && !this.checkArray(columnIndex, rowIndex)
                 && this.array[columnIndex][rowIndex].countMove == 0) {
-                this.possibleMoves.push([columnIndex + checker, rowIndex, Green, Castling])
+                this.possibleMoves.push([columnIndex + 2 * checker, rowIndex, None, Castling]);
+                this.possibleMoves.push([columnIndex + checker, rowIndex, Green, Castling]);
             }
             checker = 1;
         }
@@ -273,19 +295,34 @@ class King extends SamePieces {
     
     kingDanger() {
         for (var columnIndex = 1; columnIndex < 9; columnIndex++) {
+
             for (var rowIndex = 1; rowIndex < 9; rowIndex++) {
+
                 if (this.array[columnIndex][rowIndex] != 0 && this.array[columnIndex][rowIndex].color != this.color) {
-                    var pieceArray = this.array[columnIndex][rowIndex].getMove();
+                    var pieceArray = this.array[columnIndex][rowIndex].moves();
+
                     for (var index in pieceArray) {
+
                         for (var moveIndex in this.possibleMoves) {
-                            if (pieceArray[index][0] == this.possibleMoves[moveIndex][0] && pieceArray[index][1] == this.possibleMoves[moveIndex][1]) {
-                                console.log(pieceArray[index][0], pieceArray[index][1])
+                            if (pieceArray[index][0] == this.possibleMoves[moveIndex][0] && pieceArray[index][1] == this.possibleMoves[moveIndex][1]
+                                && pieceArray[index][3] == Danger) {
+
+                                if (this.possibleMoves[moveIndex][3] == Castling) {
+                                    var counter = parseInt(moveIndex);
+                                    counter += 1;
+
+                                    if (this.possibleMoves[counter] !== undefined) {
+                                        this.possibleMoves[counter][2] = None;
+                                    }
+                                }
+                                this.possibleMoves[moveIndex][2] = None;
                             }
                         }
                     }
                 }
             }
         }
+        console.log(this.possibleMoves)
     }
 }
 
@@ -303,8 +340,13 @@ class Queen extends SamePieces {
         this.possibleMoves = [];
     }
 
+    moves() {
+        this.move();
+        return this.possibleMoves;
+    }
+
     getMove() {
-        this.moves();
+        this.move();
         return this.possibleMoves;
     }
 }
@@ -323,8 +365,13 @@ class Rook extends SamePieces {
         this.possibleMoves = [];
     }
 
+    moves() {
+        this.move();
+        return this.possibleMoves;
+    }
+
     getMove() {
-        this.moves();
+        this.move();
         return this.possibleMoves;
     }
 }
