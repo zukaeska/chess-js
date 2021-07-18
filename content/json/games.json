@@ -317,8 +317,8 @@
                 "color": "white",
                 "move_type": "usual",
                 "name": "bishop",
-                "starting_position": "D_3",
-                "ending_position": "D_4"
+                "starting_position": "C_4",
+                "ending_position": "D_3"
             },
             {
                 "number": "16",
@@ -440,7 +440,7 @@
             {
                 "number": "10",
                 "color": "black",
-                "move_type": "kill+check",
+                "move_type": "kill",
                 "name": "bishop",
                 "starting_position": "B_4",
                 "ending_position": "C_3"
@@ -613,7 +613,7 @@
             {
                 "number": "9",
                 "color": "white",
-                "move_type": "usual",
+                "move_type": "kill",
                 "name": "queen",
                 "starting_position": "D_1",
                 "ending_position": "D_4"
@@ -678,7 +678,7 @@
                 "number": "17",
                 "color": "white",
                 "move_type": "usual",
-                "name": "bioshop",
+                "name": "bishop",
                 "starting_position": "F_1",
                 "ending_position": "B_5"
             },
@@ -686,7 +686,7 @@
                 "number": "18",
                 "color": "black",
                 "move_type": "usual",
-                "name": "bioshop",
+                "name": "bishop",
                 "starting_position": "F_8",
                 "ending_position": "D_6"
             }
@@ -864,7 +864,7 @@
                 "number": "5",
                 "color": "white",
                 "move_type": "usual",
-                "name": "bioshop",
+                "name": "bishop",
                 "starting_position": "F_1",
                 "ending_position": "G_2"
             },
@@ -888,7 +888,7 @@
                 "number": "8",
                 "color": "black",
                 "move_type": "usual",
-                "name": "bioshop",
+                "name": "bishop",
                 "starting_position": "C_8",
                 "ending_position": "F_5"
             },
@@ -896,7 +896,7 @@
                 "number": "9",
                 "color": "white",
                 "move_type": "usual",
-                "name": "bioshop",
+                "name": "bishop",
                 "starting_position": "C_1",
                 "ending_position": "B_2"
             },
@@ -920,7 +920,7 @@
                 "number": "12",
                 "color": "black",
                 "move_type": "usual",
-                "name": "bioshop",
+                "name": "bishop",
                 "starting_position": "F_8",
                 "ending_position": "D_6"
             },

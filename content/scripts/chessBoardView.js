@@ -38,11 +38,14 @@ $(function () {
         var columnNumber = parseInt(id.split(Underscore)[0].charCodeAt(0) - 64);
         var rowNumber = parseInt(id.split(Underscore)[1]);
 
-        if(board.array[columnNumber][rowNumber] != 0){
+        if (board.array[columnNumber][rowNumber] != 0) {
             var object = board.array[columnNumber][rowNumber];
             
             getMoves(object);
-        }   
+        } else {
+
+            reset();  
+        }  
     });
 });
 
@@ -115,7 +118,7 @@ function animate(starting, ending, piece, type, appendPiece) {
         endPlace.append(piece);
         $(piece).css("position","static");
         $(piece).css({top: 0, left: 0});
-        if(type == Kill){
+        if (type == Kill) {
             $("#" + starting).append(appendPiece);
         }
     });
@@ -151,37 +154,42 @@ $(document).ready(function(){
     
             animate(startingId, endingId, piece);
     
-            if(endingPiece !== undefined && endingPiece !== null){
+            if (endingPiece !== undefined && endingPiece !== null) {
                 diedPiece[arrayIndex] = endingPiece;
                 $(endingPiece).remove();
                 arrayIndex++;
             }
     
             index++;  
+            turnIndex++;
         }
 
     }); 
     $("#back").click(function(){
         buttonIndex = 0;
-        index--;
-        var startingId = moveArray[index].starting_position;
-        var endingId = moveArray[index].ending_position;
-        var piece = document.getElementById(startingId).firstChild;
-        var endingPiece = document.getElementById(endingId).firstChild;
-        var startingColumnNumber = parseInt(moveArray[index].starting_position.split(Underscore)[0].charCodeAt(0) - 64);
-        var startingRowNumber = parseInt(moveArray[index].starting_position.split(Underscore)[1]);
-        var endingColumnNumber = parseInt(moveArray[index].ending_position.split(Underscore)[0].charCodeAt(0) - 64);
-        var endingRowNumber = parseInt(moveArray[index].ending_position.split(Underscore)[1]);
-        var type = moveArray[index].move_type;
+        if (index >= 1) {
+            index--;
+            var startingId = moveArray[index].starting_position;
+            var endingId = moveArray[index].ending_position;
+            var endingPiece = document.getElementById(endingId).firstChild;
+            var startingColumnNumber = parseInt(moveArray[index].starting_position.split(Underscore)[0].charCodeAt(0) - 64);
+            var startingRowNumber = parseInt(moveArray[index].starting_position.split(Underscore)[1]);
+            var endingColumnNumber = parseInt(moveArray[index].ending_position.split(Underscore)[0].charCodeAt(0) - 64);
+            var endingRowNumber = parseInt(moveArray[index].ending_position.split(Underscore)[1]);
+            var type = moveArray[index].move_type;
+    
+            if (type == Kill) {
+                arrayIndex--;
+                var appendPiece = diedPiece[arrayIndex];
+            }
+    
+            gameMove(endingColumnNumber, endingRowNumber, startingColumnNumber, startingRowNumber, type, buttonIndex);
+    
+            animate(endingId, startingId, endingPiece, type, appendPiece);
 
-        if(type == Kill){
-            arrayIndex--;
-            var appendPiece = diedPiece[arrayIndex];
+            turnIndex++;
         }
 
-        gameMove(endingColumnNumber, endingRowNumber, startingColumnNumber, startingRowNumber, type, buttonIndex);
-
-        animate(endingId, startingId, endingPiece, type, appendPiece);
     }); 
 });
 

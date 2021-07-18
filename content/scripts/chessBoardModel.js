@@ -322,7 +322,6 @@ class King extends SamePieces {
                 }
             }
         }
-        console.log(this.possibleMoves)
     }
 }
 

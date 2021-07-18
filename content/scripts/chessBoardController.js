@@ -39,6 +39,7 @@ function turn(){
 
 function gameMove(startingColumnNumber, startingRowNumber, endingColumnNumber, endingRowNumber, type, buttonIndex) {
     var object = board.array[endingColumnNumber][endingRowNumber]; 
+    
     board.array[endingColumnNumber][endingRowNumber] = board.array[startingColumnNumber][startingRowNumber];
     board.array[endingColumnNumber][endingRowNumber].letter = String.fromCharCode(endingColumnNumber + 64);
     board.array[endingColumnNumber][endingRowNumber].number = endingRowNumber;
@@ -46,7 +47,6 @@ function gameMove(startingColumnNumber, startingRowNumber, endingColumnNumber, e
 
     
     if (buttonIndex == 0) {
-        console.log(2)
         board.array[endingColumnNumber][endingRowNumber].countMove -= 2;
     }
 
@@ -105,6 +105,4 @@ function gameMove(startingColumnNumber, startingRowNumber, endingColumnNumber, e
             animate(rookObject[rookIndex][5], rookObject[rookIndex][4], rookObject[rookIndex][6]);
         }
     }
-
-    console.log(board.array)
 }

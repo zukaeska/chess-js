@@ -453,8 +453,8 @@ var games =
                     "color": "white",
                     "move_type": "usual",
                     "name": "bishop",
-                    "starting_position": "D_3",
-                    "ending_position": "D_4"
+                    "starting_position": "C_4",
+                    "ending_position": "D_3"
                 },
                 {
                     "number": "16",
@@ -576,7 +576,7 @@ var games =
                 {
                     "number": "10",
                     "color": "black",
-                    "move_type": "kill+check",
+                    "move_type": "kill",
                     "name": "bishop",
                     "starting_position": "B_4",
                     "ending_position": "C_3"
@@ -749,7 +749,7 @@ var games =
                 {
                     "number": "9",
                     "color": "white",
-                    "move_type": "usual",
+                    "move_type": "kill",
                     "name": "queen",
                     "starting_position": "D_1",
                     "ending_position": "D_4"
