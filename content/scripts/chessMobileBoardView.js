@@ -126,71 +126,88 @@ function animate(starting, ending, piece, type, appendPiece) {
 
 
 $(document).ready(function(){
-    var object = JSON.parse(games);
-    var page = window.location.href.split("=")[2];
-    var name = page;
-    var mainObject = object[name];
-    var moveArray = mainObject.move;
-    var index = 0;
-    var arrayIndex = 0;
-    var diedPiece = [];
-    var totalMoves;
+    // var object = JSON.parse(games);
 
-    $("#next").click(function(){
-        totalMoves = parseInt(mainObject.total_move) - 1;
-        buttonIndex = 1;
-        if (index <= totalMoves) {
-            var startingId = moveArray[index].starting_position;
-            var endingId = moveArray[index].ending_position;
-            var piece = document.getElementById(startingId).firstChild;
-            var endingPiece = document.getElementById(endingId).firstChild;
-            var startingColumnNumber = parseInt(moveArray[index].starting_position.split(Underscore)[0].charCodeAt(0) - 64);
-            var startingRowNumber = parseInt(moveArray[index].starting_position.split(Underscore)[1]);
-            var endingColumnNumber = parseInt(moveArray[index].ending_position.split(Underscore)[0].charCodeAt(0) - 64);
-            var endingRowNumber = parseInt(moveArray[index].ending_position.split(Underscore)[1]);
-            var type = moveArray[index].move_type;
 
-            gameMove(startingColumnNumber, startingRowNumber, endingColumnNumber, endingRowNumber, type, buttonIndex);
-    
-            animate(startingId, endingId, piece);
-    
-            if (endingPiece !== undefined && endingPiece !== null) {
-                diedPiece[arrayIndex] = endingPiece;
-                $(endingPiece).remove();
-                arrayIndex++;
+    $.ajax({
+        url: "https://localhost:44396/json/games.json", success: function (result) {
+            var startingJson = JSON.stringify(result);
+            var jsonObject = JSON.parse(startingJson);
+            
+            moves(jsonObject);
             }
-    
-            index++;  
-            turnIndex++;
+        })
+    function moves(object) {
+        var page = window.location.href.split("=")[2];
+        if (page !== undefined) {
+            var name = page;
+            var mainObject = object[name];
+            var moveArray = mainObject.move;
+            var index = 0;
+            var arrayIndex = 0;
+            var diedPiece = [];
+            var totalMoves;
         }
 
-    }); 
-    $("#back").click(function(){
-        buttonIndex = 0;
-        if (index >= 1) {
-            index--;
-            var startingId = moveArray[index].starting_position;
-            var endingId = moveArray[index].ending_position;
-            var endingPiece = document.getElementById(endingId).firstChild;
-            var startingColumnNumber = parseInt(moveArray[index].starting_position.split(Underscore)[0].charCodeAt(0) - 64);
-            var startingRowNumber = parseInt(moveArray[index].starting_position.split(Underscore)[1]);
-            var endingColumnNumber = parseInt(moveArray[index].ending_position.split(Underscore)[0].charCodeAt(0) - 64);
-            var endingRowNumber = parseInt(moveArray[index].ending_position.split(Underscore)[1]);
-            var type = moveArray[index].move_type;
-    
-            if (type == Kill) {
-                arrayIndex--;
-                var appendPiece = diedPiece[arrayIndex];
+
+
+
+        $("#next").click(function(){
+            totalMoves = parseInt(mainObject.total_move) - 1;
+            buttonIndex = 1;
+            if (index <= totalMoves) {
+                var startingId = moveArray[index].starting_position;
+                var endingId = moveArray[index].ending_position;
+                var piece = document.getElementById(startingId).firstChild;
+                var endingPiece = document.getElementById(endingId).firstChild;
+                var startingColumnNumber = parseInt(moveArray[index].starting_position.split(Underscore)[0].charCodeAt(0) - 64);
+                var startingRowNumber = parseInt(moveArray[index].starting_position.split(Underscore)[1]);
+                var endingColumnNumber = parseInt(moveArray[index].ending_position.split(Underscore)[0].charCodeAt(0) - 64);
+                var endingRowNumber = parseInt(moveArray[index].ending_position.split(Underscore)[1]);
+                var type = moveArray[index].move_type;
+
+                gameMove(startingColumnNumber, startingRowNumber, endingColumnNumber, endingRowNumber, type, buttonIndex);
+        
+                animate(startingId, endingId, piece);
+        
+                if (endingPiece !== undefined && endingPiece !== null) {
+                    diedPiece[arrayIndex] = endingPiece;
+                    $(endingPiece).remove();
+                    arrayIndex++;
+                }
+        
+                index++;  
+                turnIndex++;
             }
-    
-            gameMove(endingColumnNumber, endingRowNumber, startingColumnNumber, startingRowNumber, type, buttonIndex);
-    
-            animate(endingId, startingId, endingPiece, type, appendPiece);
 
-            turnIndex++;
-        }
+        }); 
+        $("#back").click(function(){
+            buttonIndex = 0;
+            if (index >= 1) {
+                index--;
+                var startingId = moveArray[index].starting_position;
+                var endingId = moveArray[index].ending_position;
+                var endingPiece = document.getElementById(endingId).firstChild;
+                var startingColumnNumber = parseInt(moveArray[index].starting_position.split(Underscore)[0].charCodeAt(0) - 64);
+                var startingRowNumber = parseInt(moveArray[index].starting_position.split(Underscore)[1]);
+                var endingColumnNumber = parseInt(moveArray[index].ending_position.split(Underscore)[0].charCodeAt(0) - 64);
+                var endingRowNumber = parseInt(moveArray[index].ending_position.split(Underscore)[1]);
+                var type = moveArray[index].move_type;
+        
+                if (type == Kill) {
+                    arrayIndex--;
+                    var appendPiece = diedPiece[arrayIndex];
+                }
+        
+                gameMove(endingColumnNumber, endingRowNumber, startingColumnNumber, startingRowNumber, type, buttonIndex);
+        
+                animate(endingId, startingId, endingPiece, type, appendPiece);
 
-    }); 
+                turnIndex++;
+            }
+
+        });
+    } 
 });
 
 

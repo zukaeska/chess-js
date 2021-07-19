@@ -139,13 +139,16 @@ $(document).ready(function(){
         })
     function moves(object) {
         var page = window.location.href.split("=")[2];
-        var name = page;
-        var mainObject = object[name];
-        var moveArray = mainObject.move;
-        var index = 0;
-        var arrayIndex = 0;
-        var diedPiece = [];
-        var totalMoves;
+        if (page !== undefined) {
+            var name = page;
+            var mainObject = object[name];
+            var moveArray = mainObject.move;
+            var index = 0;
+            var arrayIndex = 0;
+            var diedPiece = [];
+            var totalMoves;
+        }
+
 
 
 
