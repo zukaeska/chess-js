@@ -1,5 +1,19 @@
 $(document).ready(function () {
-    var gamesObject = JSON.parse(gamesInfo);
+
+    $.ajax({
+        url: "https://localhost:44396/json/gamesInfo.json", success: function (result) {
+            var gamesJson = JSON.stringify(result);
+            var gamesObject = JSON.parse(gamesJson);
+            
+            getGames(gamesObject);
+        }
+    })
+
+    // var gamesObject = JSON.parse(gamesInfo);
+
+});
+
+function getGames(gamesObject) {  
     var page = window.location.href.split("=")[1];
     var object = gamesObject[page].games;
 
@@ -23,4 +37,5 @@ $(document).ready(function () {
         button.firstChild.className = Link;
         $("#" + gameId).append(date, player);
     }
-});
+}
+

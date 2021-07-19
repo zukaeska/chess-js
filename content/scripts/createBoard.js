@@ -66,7 +66,16 @@ function createTable() {
 
     board.createArray();
 
-    positioning(mainObject);
+    $.ajax({
+        url: "https://localhost:44396/json/games.json", success: function (result) {
+            var startingJson = JSON.stringify(result);
+            var jsonObject = JSON.parse(startingJson);
+
+            positioning(jsonObject);
+        }
+    })
+
+    
 }
 
 

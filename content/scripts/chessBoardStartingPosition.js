@@ -1,5 +1,5 @@
 var number;
-var mainObject = JSON.parse(startingPosition);
+// var mainObject = JSON.parse(startingPosition);
 
 function positioning(object){
     var quantity = object.positions.quantity;

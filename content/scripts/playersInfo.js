@@ -1,7 +1,19 @@
 $(document).ready(function () {
-    var playersObject = JSON.parse(playersInfo);
 
-    for (var index = 0; index < 3; index++){
+    $.ajax({
+        url: "https://localhost:44396/json/playersInfo.json", success: function (result) {
+            var playersJson = JSON.stringify(result);
+            var playersObject = JSON.parse(playersJson);
+
+            getPlayers(playersObject);
+        }
+    })
+});
+// var playersObject = JSON.parse(playersInfo);
+
+function getPlayers(playersObject) {
+
+    for (var index = 0; index < 3; index++) {
         var object = {};
         object = playersObject.players[index];
         var playerId = object.player_id;
@@ -22,4 +34,6 @@ $(document).ready(function () {
         link.className = Link;
         $("#" + playerId).append(heading, nation, birthdate, titles, score, img);
     }
-});
+}
+
+
