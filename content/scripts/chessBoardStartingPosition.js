@@ -25,4 +25,6 @@ function positioning(object){
         parent.appendChild(child);
         board.array[columnNumber][rownNumber] = new pieces[name](color, name, board.array, letter, rownNumber);
     }
+
+    changeCSS();
 }

@@ -62,11 +62,11 @@ function freeMove(id){
         for (var index in colorArray) {
             if (firstNumber == colorArray[index][0] && secondNumber == colorArray[index][1] 
                 && colorArray[index][2] != Yellow && colorArray[index][2] != None) {
-
                 if (colorArray[index][3] == Castling) {
-                    if (colorArray[index][0] == 2) {
-                        var rookId = String.fromCharCode(colorArray[index][0] - 1 + 64) + Underscore + colorArray[index][1];
+                    if (colorArray[index][0] == 3) {
+                        var rookId = String.fromCharCode(colorArray[index][0] - 2 + 64) + Underscore + colorArray[index][1];
                         var endId = String.fromCharCode(colorArray[index][0] + 1 + 64) + Underscore + colorArray[index][1];
+                        console.log(rookId, endId)
                     } else {
                         var rookId = String.fromCharCode(colorArray[index][0] + 1 + 64) + Underscore + colorArray[index][1];
                         var endId = String.fromCharCode(colorArray[index][0] - 1 + 64) + Underscore + colorArray[index][1];
@@ -83,8 +83,8 @@ function freeMove(id){
                     board.array[endColumnCoordinate][endRowCoordinate].number = parseInt(endId.split(Underscore)[1]);
                     board.array[endColumnCoordinate][endRowCoordinate].countMove++;
                     board.array[columnCoordinate][rowCoordinate] = 0;
-                    console.log(board.array[endColumnCoordinate][endRowCoordinate],board.array[columnCoordinate][rowCoordinate])
                     animate(rookId, endId, rookPiece);
+                    console.log(board.array)
                 }
 
                 board.array[firstNumber][secondNumber] = board.array[colorArray[0][0]][colorArray[0][1]];

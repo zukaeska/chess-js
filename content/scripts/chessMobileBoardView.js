@@ -211,36 +211,33 @@ $(document).ready(function(){
 });
 
 
-$(function () {
-    $(TdTag).css({
-        "width" : "25px",
-        "height" : "25px",
-    });
-    $(Img).css({
-        "width" : "20px",
-        "height" : "20px",
-    });
-    $().css({
-
-    });
-    $(Player1).css({
-        "width" : "60px",
-        "height" : "30px",
-        "background-color" : Brown,
-        "position" : "absolute",
-        "margin-top" : "-80px",
-        "margin-left" : "470px"
-    });
-    $(Player2).css({
-        "width" : "60px",
-        "height" : "30px",
-        "background-color" : White,
-        "position" : "absolute",
-        "margin-top" : "350px",
-        "margin-left" : "470px"
-    });
-    $(Page).css({
-        "width" : "500px",
-        "height" : "5000px"
-    })
-});
+    function changeCSS() {
+        $(TdTag).css({
+            "width" : "25px",
+            "height" : "25px",
+        });
+        $(Player1).css({
+            "width" : "60px",
+            "height" : "30px",
+            "background-color" : Brown,
+            "position" : "absolute",
+            "margin-top" : "-80px",
+            "margin-left" : "470px"
+        });
+        $(Player2).css({
+            "width" : "60px",
+            "height" : "30px",
+            "background-color" : White,
+            "position" : "absolute",
+            "margin-top" : "350px",
+            "margin-left" : "470px"
+        });
+        $(Page).css({
+            "width" : "500px",
+            "height" : "5000px"
+        });
+        $(Img).css({
+            "width" : "20px",
+            "height" : "20px",
+        });
+    }

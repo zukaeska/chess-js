@@ -117,7 +117,6 @@ class Pawn extends Piece {
         this.number = number;
         this.type = Unusual;
         this.limit = Infinity;
-        this.killType = Unusual;
         this.countMove = 0;
         this.possibleMoves = [];
     }
@@ -184,8 +183,7 @@ class Knight extends Piece {
         this.letter = letter;
         this.number = number;
         this.type = Unusual;
-        this.limit = Infinity;
-        this.killType = Direct;
+        this.limit = Infinity;     
         this.countMove = 0;
         this.possibleMoves = [];
 
@@ -225,7 +223,6 @@ class Bishop extends SamePieces {
         this.number = number;
         this.type = Diagonal;
         this.limit = Infinity;
-        this.killType = Direct;
         this.countMove = 0;
         this.possibleMoves = [];
     }
@@ -249,8 +246,7 @@ class King extends SamePieces {
         this.letter = letter;
         this.number = number;
         this.type = Both;
-        this.limit = 1;
-        this.killType = Direct;
+        this.limit = 1;       
         this.countMove = 0;
         this.possibleMoves = [];
     }
@@ -266,7 +262,6 @@ class King extends SamePieces {
             this.possibleRook();
         }
         this.kingDanger();
-
         return this.possibleMoves;
     }
 
@@ -286,8 +281,13 @@ class King extends SamePieces {
 
             if ((columnIndex == 1 || columnIndex == 8) && !this.checkArray(columnIndex, rowIndex)
                 && this.array[columnIndex][rowIndex].countMove == 0) {
-                this.possibleMoves.push([columnIndex + 2 * checker, rowIndex, None, Castling]);
-                this.possibleMoves.push([columnIndex + checker, rowIndex, Green, Castling]);
+                if (checker == -1) {
+                    this.possibleMoves.push([columnIndex + 2 * checker, rowIndex, None, Castling]);
+                    this.possibleMoves.push([columnIndex + checker, rowIndex, Green, Castling]);
+                } else {
+                    this.possibleMoves.push([columnIndex + 3 * checker, rowIndex, None, Castling]);
+                    this.possibleMoves.push([columnIndex + 2 * checker, rowIndex, Green, Castling]);
+                }
             }
             checker = 1;
         }
@@ -333,8 +333,7 @@ class Queen extends SamePieces {
         this.letter = letter;
         this.number = number;
         this.type = Both;
-        this.limit = Infinity;
-        this.killType = Direct;
+        this.limit = Infinity;      
         this.countMove = 0;
         this.possibleMoves = [];
     }
@@ -358,8 +357,7 @@ class Rook extends SamePieces {
         this.letter = letter;
         this.number = number;
         this.type = Horizontal;
-        this.limit = Infinity;
-        this.killType = Direct;
+        this.limit = Infinity;      
         this.countMove = 0;
         this.possibleMoves = [];
     }
